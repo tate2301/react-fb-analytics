@@ -17,6 +17,10 @@ export default class FacebookConversion {
     constructor(pixelId: number, testCode?: string) {
         this.pixelId = pixelId
         this.testCode = testCode
+        this.serverSideTracker = new FacebookEventTracker({
+            pixelId: this.pixelId,
+            testEventCode: this.testCode
+        });
         // this.init()
     }
 
@@ -31,10 +35,6 @@ export default class FacebookConversion {
     init = () => {
         initFacebookPixel(this.pixelId)
         AID_PowerPixelInit(this.serverSideTracker.transform())
-        this.serverSideTracker = new FacebookEventTracker({
-            pixelId: this.pixelId,
-            testEventCode: this.testCode
-        });
     }
 
     track = async ({eventName, actionSource, userData, customData }: {

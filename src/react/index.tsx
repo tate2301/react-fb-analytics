@@ -1,4 +1,4 @@
-import React, {createContext} from "react";
+import React, {createContext, useState} from "react";
 import {ReactContextProps} from "../types";
 import FacebookConversion from "../index";
 
@@ -6,15 +6,13 @@ export const FacebookEventTrackerContext =
     createContext<FacebookConversion | null>(null)
 
 export const FacebookEventProvider = ({ children, config }: ReactContextProps) => {
-    const fbTracker: FacebookConversion = (
-        new FacebookConversion(
-            config.pixelId,
-            config.testCode,
-        )
-    )
-    fbTracker.config(config.apiKey, config.wrapperUrl)
+    const [fbTracker] = useState<FacebookConversion>(new FacebookConversion(
+        config.pixelId,
+        config.testCode,
+    ))
 
-    typeof(window) !== "undefined" && fbTracker.init()
+    fbTracker.config(config.apiKey, config.wrapperUrl)
+    fbTracker.init()
 
     return (
         <FacebookEventTrackerContext.Provider value={fbTracker}>
