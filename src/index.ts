@@ -70,16 +70,15 @@ export default class FacebookConversion {
             data: this.serverSideTracker.transform(),
             headers: this.headers,
             url: this.wrapperUrl
-        }).then(() => {
-            facebookPixelEvent(
-                eventName,
-                eventId,
-                {
-                    fn: userData?.firstName,
-                    ln: userData?.lastName,
-                    em: userData?.email,
-                    ...customData
-            })
         })
+        await facebookPixelEvent(
+            eventName,
+            eventId,
+            {
+                fn: userData?.firstName,
+                ln: userData?.lastName,
+                em: userData?.email,
+                ...customData
+            })
     }
 }
