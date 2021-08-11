@@ -1,4 +1,5 @@
 import { ActionSource } from "../enums";
+import {ReactElement} from "react";
 
 export interface IPixelConfig {
   pixelId: number;
@@ -34,4 +35,23 @@ export class EventDataClass implements IEventData {
   serverData: IServerData;
   userData?: IUserData;
   customData?: ICustomData;
+}
+
+export type ServerProps = {
+  data: object
+  headers: object
+  url: string
+}
+
+export type ReactContextProps = {
+  children: ReactElement
+  config: Config
+}
+
+export type Config = {
+  apiKey: string
+  pixelId: number
+  wrapperUrl: string
+  testCode?: string
+  dev?: boolean
 }

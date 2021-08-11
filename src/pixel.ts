@@ -24,9 +24,8 @@ export function initFacebookPixel(pixelId: number) {
     );
     fbq("init", pixelId);
 }
-  
+
   // This is just a wrapper function for convenience
-export function facebookPixelEvent(eventName, eventId, eventData = null) {
+export function facebookPixelEvent(eventName, eventId, eventData?: object = null) {
     fbq("track", eventName, eventData, { eventID: eventId });
 }
-  

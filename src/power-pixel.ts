@@ -1,5 +1,6 @@
 import { facebookPixelEvent } from "./pixel";
 import { makeid } from "./functions";
+import {EventDataClass} from "./types";
 
 let aidPixelStarted = !1;
 let aidScrollFired20 = !1;
@@ -21,7 +22,7 @@ function aidGetScrollPercent() {
   return Math.round(t);
 }
 
-export function AID_PowerPixelInit(pixelEvents) {
+export function AID_PowerPixelInit(pixelEvents: EventDataClass) {
   // Bot-Checker Regex.
   // https://observablehq.com/@hugodf/crawler-regex
   const botAgents =
@@ -39,7 +40,7 @@ export function AID_PowerPixelInit(pixelEvents) {
 
       // Onclick Handler for Init. after Cookie-Banner
       if (!aidPixelStarted) {
-        document.body.addEventListener("click", function (e) {
+        document.body.addEventListener("click", function () {
           setTimeout(() => {
             AID_PowerPixelInit(pixelEvents);
           }, 3000);
@@ -52,7 +53,7 @@ export function AID_PowerPixelInit(pixelEvents) {
   }
 }
 
-async function sendEvents(pixelEvents, eventId, eventName) {
+async function sendEvents(pixelEvents: EventDataClass, eventId: number, eventName: string) {
   const events = {
     ...pixelEvents,
     serverData: {
@@ -77,14 +78,14 @@ async function sendEvents(pixelEvents, eventId, eventName) {
   console.log(await response.json());
 }
 
-function triggerEvents(pixelEvents, eventName) {
+function triggerEvents(pixelEvents: EventDataClass, eventName: string) {
   const eventId = makeid(16);
 
   facebookPixelEvent(eventName, eventId);
   sendEvents(pixelEvents, eventId, eventName);
 }
 
-function AID_PowerPixelStart(pixelEvents) {
+function AID_PowerPixelStart(pixelEvents: EventDataClass) {
   console.log("PowerPixel started...");
 
   // Fire: 3s Pixel
@@ -101,7 +102,7 @@ function AID_PowerPixelStart(pixelEvents) {
     triggerEvents(pixelEvents, "AIS: VisitingTime5s");
   }, 2000);
 
-  window.addEventListener("scroll", function (o) {
+  window.addEventListener("scroll", function () {
     //console.log('Scrolling');
 
     // Fire: 20 Percent
