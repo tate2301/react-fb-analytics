@@ -10,7 +10,7 @@ export default class FacebookConversion {
     headers: object;
     constructor(pixelId: number, testCode?: string);
     config: (apiKey: string, wrapperUrl: string) => void;
-    private init;
+    init: () => void;
     track: ({ eventName, actionSource, userData, customData }: {
         eventName: string;
         actionSource: ActionSource;

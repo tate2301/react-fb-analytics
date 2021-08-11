@@ -6,16 +6,15 @@ export const FacebookEventTrackerContext =
     createContext<FacebookConversion | null>(null)
 
 export const FacebookEventProvider = ({ children, config }: ReactContextProps) => {
-    let fbTracker = null
-    if (typeof (window) !== "undefined") {
-        const fbTracker: FacebookConversion = (
-            new FacebookConversion(
-                config.pixelId,
-                config.testCode,
-            )
+    const fbTracker: FacebookConversion = (
+        new FacebookConversion(
+            config.pixelId,
+            config.testCode,
         )
-        fbTracker.config(config.apiKey, config.wrapperUrl)
-    }
+    )
+    fbTracker.config(config.apiKey, config.wrapperUrl)
+
+    typeof(window) !== "undefined" && fbTracker.init()
 
     return (
         <FacebookEventTrackerContext.Provider value={fbTracker}>
