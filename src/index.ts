@@ -70,7 +70,7 @@ export default class FacebookConversion {
             data: this.serverSideTracker.transform(),
             headers: this.headers,
             url: this.wrapperUrl
-        })
+        }).catch(err => console.log(err))
         await facebookPixelEvent(
             eventName,
             eventId,
