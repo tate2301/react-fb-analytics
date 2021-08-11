@@ -18,7 +18,7 @@ export default class FacebookConversion {
     constructor(pixelId: number, testCode?: string, dev?: boolean) {
         this.pixelId = pixelId
         this.testCode = testCode
-        this.dev = dev ?? true
+        this.dev = dev ?? false
         this.init()
     }
 
