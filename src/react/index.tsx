@@ -1,6 +1,6 @@
-import React, {createContext, useContext} from "react";
-import {ReactContextProps} from "./types";
-import FacebookConversion from "./index";
+import React, {createContext} from "react";
+import {ReactContextProps} from "../types";
+import FacebookConversion from "../index";
 
 export const FacebookEventTrackerContext =
     createContext<FacebookConversion | null>(null)
@@ -22,8 +22,3 @@ export const FacebookEventProvider = ({ children, config }: ReactContextProps) =
     )
 }
 
-export const useFacebookEvents = () => {
-    const fbTracker = useContext(FacebookEventTrackerContext)
-
-    return { trackEvent: fbTracker?.track }
-}
