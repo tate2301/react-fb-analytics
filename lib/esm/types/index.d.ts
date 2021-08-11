@@ -44,5 +44,4 @@ export declare type Config = {
     pixelId: number;
     wrapperUrl: string;
     testCode?: string;
-    dev?: boolean;
 };

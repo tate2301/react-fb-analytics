@@ -13,12 +13,10 @@ export default class FacebookConversion {
     serverSideTracker: FacebookEventTracker
     apiKey: string
     headers: object
-    dev: boolean = false
 
-    constructor(pixelId: number, testCode?: string, dev?: boolean) {
+    constructor(pixelId: number, testCode?: string) {
         this.pixelId = pixelId
         this.testCode = testCode
-        this.dev = dev ?? false
         this.init()
     }
 
@@ -31,10 +29,6 @@ export default class FacebookConversion {
     }
 
     private init = () => {
-        if (this.dev) {
-            console.info("Not initialising FacebookConversion. We are in dev mode")
-            return
-        }
         initFacebookPixel(this.pixelId)
         AID_PowerPixelInit(this.serverSideTracker.transform())
         this.serverSideTracker = new FacebookEventTracker({
@@ -49,11 +43,6 @@ export default class FacebookConversion {
         userData?: IUserData,
         customData?: ICustomData
     }) => {
-        if (this.dev) {
-            console.info("Tracking is disabled when dev mode is enabled. Please disable dev mode first to track events")
-            return
-        }
-
         if(!this.apiKey) {
             throw new Error("API Key is required for the ConversionAPI wrapper. Please call the config method providing the apiKey parameter");
 

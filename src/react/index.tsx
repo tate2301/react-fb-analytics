@@ -10,7 +10,6 @@ export const FacebookEventProvider = ({ children, config }: ReactContextProps) =
         new FacebookConversion(
             config.pixelId,
             config.testCode,
-            config.dev
         )
     )
     fbTracker.config(config.apiKey, config.wrapperUrl)

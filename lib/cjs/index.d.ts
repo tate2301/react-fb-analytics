@@ -8,8 +8,7 @@ export default class FacebookConversion {
     serverSideTracker: FacebookEventTracker;
     apiKey: string;
     headers: object;
-    dev: boolean;
-    constructor(pixelId: number, testCode?: string, dev?: boolean);
+    constructor(pixelId: number, testCode?: string);
     config: (apiKey: string, wrapperUrl: string) => void;
     private init;
     track: ({ eventName, actionSource, userData, customData }: {
